@@ -14,7 +14,7 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Text>Win pannita marra! Home Screen</Text>
+        <Text>Home Screen</Text>
       </View>
     );
   }
