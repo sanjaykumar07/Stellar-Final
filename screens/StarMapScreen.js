@@ -1,56 +1,84 @@
-import React from "react";
-import {
-  Platform,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ImageBackground,
-  Image,
-} from "react-native";
+import React, { Component } from 'react';
+import { Text, View, TextInput, StyleSheet, Platform, StatusBar, SafeAreaView, ImageBackgrounda, ImageBackground } from 'react-native';
+import { WebView } from 'react-native-webview';
 
-export default class StarMapScreen extends React.Component {
+export default class StarMapScreen extends Component {
+  constructor() {
+    super()
+    this.state = {
+      longitude: '',
+      latitude: ''
+    }
+  }
   render() {
+    const { longitude, latitude } = this.state;
+    const path = `https://virtualsky.lco.global/embed/index.html?longitude=${longitude}&latitude=${latitude}&constellations=true&constellationlabels=true&showstarlabels=true&gridlines_az=true&live=true&projection=stereo&showdate=false&showposition=false`
     return (
-      <View style={{ flex: 1 }}>
-        <Text>StarMap Screen</Text>
-<TouchableOpacity
-          style={[styles.button, { flex: 0.13, marginTop: 50 }]}
-          onPress={() => {
-            this.props.navigation.navigate('HomeScreen');
-          }}>
-          <Text
-            style={[
-              styles.text,
-              {
-                alignSelf: 'center',
-                marginTop: 10,
-              },
-            ]}>
-            Back
-          </Text>
-        </TouchableOpacity>
+      <View style={{ flex: 1, backgroundColor: "#1a0023" }}>
+        <SafeAreaView style={styles.droidSafeArea} />
+        <View style={{ flex: 0.3, marginTop: 50, alignItems: 'center' }}>
+          <Text style={styles.titleText}>Star Map</Text>
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Enter your longitude"
+            placeholderTextColor="white"
+            onChangeText={(text) => {
+              this.setState({
+                longitude: text
+              })
+            }}
+          />
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Enter your latitude"
+            placeholderTextColor="white"
+            onChangeText={(text) => {
+              this.setState({
+                latitude: text
+              })
+            }}
+          />
+        </View>
+        <WebView
+          scalesPageToFit={true}
+          source={{ uri: path }}
+          style={{ marginTop: 20, marginBottom: 20, }}
+        />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-    button: {
-    width: 200,
-    height: 50,
-    backgroundColor: 'white',
-    borderRadius: 50,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  droidSafeArea: {
+    marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  titleText: {
+    fontSize: 35,
+    fontWeight: "bold",
+    color: "white",
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  inputStyle: {
+    height: 60,
+    borderColor: 'gray',
     borderWidth: 1,
-    alignSelf: 'center',
-    alignItems: 'center',
-  },
-  text: {
+    borderRadius: 20,
+    marginTop: 20,
+    marginRight: 20,
+    marginLeft: 20,
     textAlign: 'center',
-    marginTop: 7,
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#e00382',
-  },
-});
+    color: 'white',
+    width: 200
+  }
+})
