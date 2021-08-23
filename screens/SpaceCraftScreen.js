@@ -1,36 +1,49 @@
-import React from "react";
+import React, { Component } from "react";
 import {
-  Platform,
-  SafeAreaView,
-  StyleSheet,
   Text,
   View,
-  TouchableOpacity,
-  ImageBackground,
   Image,
+  ImageBackground,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  Platform,
+  StatusBar,
+  SafeAreaView,
+  Linking,
+  ScrollView,
 } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default class SpaceCraftScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <Text>SpaceCraft Screen</Text>
-<TouchableOpacity
-          style={[styles.button, { flex: 0.13, marginTop: 50 }]}
-          onPress={() => {
-            this.props.navigation.navigate('HomeScreen');
-          }}>
-          <Text
-            style={[
-              styles.text,
-              {
-                alignSelf: 'center',
-                marginTop: 10,
-              },
-            ]}>
-            Back
-          </Text>
-        </TouchableOpacity>
+      <View style={{ flex: 1,backgroundColor:'black' }}>
+            <View style={{flexDirection:'row'}}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.navigation.navigate("HomeScreen");
+                }}
+                style={{ marginRight: RFValue(95), flexDirection: "row" }}
+              >
+                <Ionicons
+                  name="chevron-back-outline"
+                  color={"white"}
+                  size={RFValue(40)}
+                />
+                <Text
+                  style={{
+                    marginTop: RFValue(7),
+                    color: "white",
+                    fontSize: RFValue(20),
+                  }}
+                >
+                  Back
+                </Text>
+              </TouchableOpacity>
+              <Text style={styles.routeText}>Space Crafts</Text>
+            </View>
       </View>
     );
   }
@@ -52,6 +65,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#e00382',
+  },
+  routeText: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
   },
 });
 

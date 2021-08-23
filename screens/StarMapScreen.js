@@ -1,5 +1,22 @@
-import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet, Platform, StatusBar, SafeAreaView, ImageBackgrounda, ImageBackground } from 'react-native';
+import React, { Component } from "react";
+import {
+  Text,
+  View,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  Platform,
+  StatusBar,
+  SafeAreaView,
+  Linking,
+  ScrollView,
+  TextInput
+} from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
+import axios from "axios";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { WebView } from 'react-native-webview';
 
 export default class StarMapScreen extends Component {
@@ -16,8 +33,32 @@ export default class StarMapScreen extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: "#1a0023" }}>
         <SafeAreaView style={styles.droidSafeArea} />
-        <View style={{ flex: 0.3, marginTop: 50, alignItems: 'center' }}>
-          <Text style={styles.titleText}>Star Map</Text>
+
+        <View style={{flexDirection:'row'}}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.navigation.navigate("HomeScreen");
+                }}
+                style={{ marginRight: RFValue(125), flexDirection: "row" }}
+              >
+                <Ionicons
+                  name="chevron-back-outline"
+                  color={"white"}
+                  size={RFValue(40)}
+                />
+                <Text
+                  style={{
+                    marginTop: RFValue(7),
+                    color: "white",
+                    fontSize: RFValue(20),
+                  }}
+                >
+                  Back
+                </Text>
+              </TouchableOpacity>
+              <Text style={styles.routeText}>Star Map</Text>
+            </View>
+            <View style={{ flex: 0.3, marginTop: 50, alignItems: 'center' }}>
           <TextInput
             style={styles.inputStyle}
             placeholder="Enter your longitude"
@@ -80,5 +121,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     width: 200
-  }
+  },
+  routeText: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+  },
 })
