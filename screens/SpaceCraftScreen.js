@@ -161,6 +161,8 @@ const styles = StyleSheet.create({
   ImageStyle: {
     width: "100%",
     height: 200,
+    marginLeft:0.5,
+    borderRadius:5,
     
     marginBottom: 15,
   
