@@ -47,12 +47,13 @@ export default class DailyPic extends Component {
     if (Object.keys(this.state.apod).length === 0) {
       return (
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={{ flex: 1, justifyContent: "center", alignItems: "center",backgroundColor:'black' }}
         >
           <Image
             source={require("../assets/loading.gif")}
             style={{ width: 70, height: 50, alignSelf: "center" }}
           />
+          <Text style={{color:'white',fontSize:30}}>Loading</Text>
         </View>
       );
     } else {
@@ -99,7 +100,7 @@ export default class DailyPic extends Component {
                   source={{ uri: url }}
                   style={{
                     width: "100%",
-                    height: 300,
+                    height: RFValue(300),
                     borderRadius: 10,
                   }}
                 ></Image>
